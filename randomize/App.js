@@ -4,7 +4,7 @@ import Constants from 'expo-constants';
 
 export default function App() {
   const [randomNumberList, setRandomNumberList] = React.useState([]);
-  const listItems = randomNumberList.map((number) =>  <li>{number}</li>);
+  const listItems = randomNumberList.map((number) =>  <Text>{number}</Text>);
   return (
     <View style={styles.container}>
       <Button 

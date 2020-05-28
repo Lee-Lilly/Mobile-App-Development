@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, TextInput, Button, ScrollView } from 'react-native';
+import { Text, View, StyleSheet, TextInput, Button, ScrollView, Keyboard } from 'react-native';
 import Constants from 'expo-constants';
 
 export default function App() {  
@@ -14,9 +14,7 @@ export default function App() {
 const Banner = () => {
   return (
     <View style={styles.banner}>
-      <Text> 
-       <strong>SIMPLE TODO LIST</strong>
-      </Text>     
+      <Text style={styles.bannerText}> SIMPLE TODO LIST </Text>     
     </View>
   );
 };
@@ -34,7 +32,8 @@ const TodoList = () =>{
         } 
         else{
             alert('Empty field can not be added');   
-        }    
+        } 
+      Keyboard.dismiss();     
   }
   const deleteTodo = (index) =>{
     //use filter function for keep unselected item
@@ -46,7 +45,6 @@ const TodoList = () =>{
       <View style={styles.itemRow}>
           <Text>{todo}</Text>
           <Text style={styles.itemDelete} onPress={() => 
-                                    window.confirm('Are you sure to delete this item?') && 
                                     deleteTodo(index)}> x </Text> 
       </View>      
      )
@@ -80,13 +78,16 @@ const styles = StyleSheet.create({
   },
   banner: {
     padding: 12,
-    borderRadius: 8,
-    color: '#666',
+    borderRadius: 8,   
     backgroundColor: '#5f9ea0',
-    textAlign: 'center',
     marginBottom: 20
   },
-   inputBox:{
+  bannerText:{
+    color: 'white',
+    textAlign: 'center',
+    fontWeight: 'bold'
+  },
+  inputBox:{
     borderWidth: 3,
     borderStyle: 'solid',
     borderColor: '#ccc',

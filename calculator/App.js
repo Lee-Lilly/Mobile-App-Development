@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, TextInput, Button} from 'react-native';
+import { Text, View, StyleSheet, TextInput, Button, Keyboard} from 'react-native';
 import Constants from 'expo-constants';
 
 export default function App() {
@@ -10,13 +10,13 @@ export default function App() {
   const buttonPressed = (calc) =>{
     switch(calc) {
       case '+':
-        setResult(parseInt(number1)+parseInt(number2));
+        setResult(parseInt(number1)+parseInt(number2)+"");
         break;
       case '-':
-        setResult(parseInt(number1)-parseInt(number2));
+        setResult(parseInt(number1)-parseInt(number2)+"");
         break;
       case '*':
-        setResult(parseInt(number1)*parseInt(number2));
+        setResult(parseInt(number1)*parseInt(number2)+"");
         break;
       case '/':
         if(number2 !== '0')
@@ -24,11 +24,12 @@ export default function App() {
         else setResult('Division by Zero is forbidden');  
         break;
       case 'C':
-        setNumber1(0);
-        setNumber2(0);
-        setResult(0);
+        setNumber1('0');
+        setNumber2('0');
+        setResult('0');
         break;
     }
+    Keyboard.dismiss();
   }
 
   return (
@@ -36,7 +37,7 @@ export default function App() {
       <Text style={styles.paragraph}>
         CALCULATOR
       </Text>
-      <View style={styles.row}>
+      <View style={styles.row}> 
         <View style={styles.text}>
           <Text>Number 1:</Text>
         </View>
@@ -45,7 +46,7 @@ export default function App() {
                     onChangeText={text => setNumber1(text)}
                     style={{textAlign:'center'}}
                     keyboardType={'numeric'}></TextInput>
-        </View>
+        </View> 
       </View>
       <View style={styles.row}>
         <View style={styles.text}>
@@ -95,7 +96,7 @@ const styles = StyleSheet.create({
   },
   row:{
     flexDirection: 'row',
-    marginTop: 5
+    marginTop: 5,
   },
   text:{
     marginTop: 12,
@@ -111,6 +112,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1.0,
     width: 200,
     marginLeft: 5,
+    textAlign: 'center'
   },
   buttonRow:{
     flexDirection: 'row',

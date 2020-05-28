@@ -3,17 +3,13 @@ import { Text, View, StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
 import Moment from 'moment-timezone';
 
-const Movie = props => {
+const Movie = (props) => {
   return (
-    <View style={{ alignItems: 'right' }}>
-      <Text style={styles.banner}>
-        <strong>{props.title} </strong>
-        {'\n'}
-        {props.theatre}
-        {'\n'}
-        {props.date}
-      </Text>
-    </View>
+      <View style={styles.banner}>
+        <Text style={styles.title}>{props.title}</Text>
+        <Text> {props.theatre}</Text>
+        <Text> {props.date} </Text>
+      </View>
   );
 };
 
@@ -39,7 +35,10 @@ const styles = StyleSheet.create({
     marginTop: 12,
     padding: 12,
     borderRadius: 8,
-    color: '#666',
     backgroundColor: '#b8e6f5',
   },
+  title:{
+    color: '#666',
+    fontWeight: 'bold'
+  }
 });
