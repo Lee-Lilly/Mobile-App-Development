@@ -9,7 +9,7 @@ export default function App() {
     </View>
   );
 }
-
+//individual square, gets value and onPress from props
 const Square = (props) => {
   return (
     <View>
@@ -21,7 +21,7 @@ const Square = (props) => {
 }
 
 const Board = () => {
-  //game turn of Random first player  
+  //game starts with Random player  
   const players = ['X', 'O'];
   let firstPlayer = players[Math.floor(Math.random() * players.length)];
 
@@ -33,22 +33,23 @@ const Board = () => {
     xIsNext = false;
   }
 
-  //initialize the board with 9 squares of null value, get the first player  
-  const [state, setState] = React.useState({ squares: Array(9).fill(null), gameTurn: xIsNext, clicks: 0 });
+  //initialize the board state with 9 squares of null value and the status of first player  
+  const [state, setState] = React.useState({ squares: Array(9).fill(null), gameTurn: xIsNext});
 
   function editSquare(i) {
-    //clickable ONLYIF square is null
-    if (state.squares[i] == null) {
-      state.clicks = state.clicks + 1;
-      state.squares[i] = state.gameTurn ? 'X' : 'O';
-      setState({ squares: state.squares, gameTurn: !state.gameTurn, clicks: state.clicks });
-    }  
-    //check winner after each click
-    const winner = calculateWinner(state.squares);
+    //check winner
+    const winner = calculateWinner(state.squares); 
+
     if (winner != null) {
       alert("Game Over ! Winner is: Player " + winner);
-    } //if all squares are filled but no winner, then claim a draw
-    else if (!state.squares.includes(null) && winner == null) {
+    }//editable ONLY IF the square is null and no winner come out
+    else if (state.squares[i] == null) { 
+      state.squares[i] = state.gameTurn ? 'X' : 'O';
+      setState({ squares: state.squares, gameTurn: !state.gameTurn});
+    }
+
+    //if all squares are filled but no winner, then claim a draw
+    if (!state.squares.includes(null) && winner == null) {
       alert("A Draw !");
     }        
   }
@@ -65,7 +66,7 @@ const Board = () => {
   }
 
   const player = state.gameTurn ? 'X' : 'O';
-  
+
   return (
     <View>
       <View style={styles.banner}>
