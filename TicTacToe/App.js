@@ -25,52 +25,52 @@ const Board = () => {
   const players = ['X', 'O'];
   let firstPlayer = players[Math.floor(Math.random() * players.length)];
 
-  let xIsNext = null;
-  if (firstPlayer === 'X') {
-    xIsNext = true;
-  }
-  else {
-    xIsNext = false;
-  }
+  const xIsNext = (firstPlayer === 'X') ? true : false;
 
   //initialize the board state with 9 squares of null value and the status of first player  
   const [state, setState] = React.useState({ squares: Array(9).fill(null), gameTurn: xIsNext});
 
-  function editSquare(i) {
-    //check winner
-    const winner = calculateWinner(state.squares); 
+  const winner = calculateWinner(state.squares); 
 
-    if (winner != null) {
-      alert("Game Over ! Winner is: Player " + winner);
-    }//editable ONLY IF the square is null and no winner come out
-    else if (state.squares[i] == null) { 
-      state.squares[i] = state.gameTurn ? 'X' : 'O';
-      setState({ squares: state.squares, gameTurn: !state.gameTurn});
-    }
-
-    //if all squares are filled but no winner, then claim a draw
-    if (!state.squares.includes(null) && winner == null) {
-      alert("A Draw !");
-    }        
-  }
- 
   const renderSquare = (i) => {
     return (
       <Square value={state.squares[i]} onPress={() => { editSquare(i) }} />
     );
   };
 
-  //refresh the board
-  const Restart = () => {
-    setState({ squares: Array(9).fill(null), gameTurn: xIsNext })
+  function editSquare(i) {
+      //check winner
+      if (!winner) {  //game continues ONLYIF the square includes null and no winner come out  
+        if (state.squares.includes(null)) {
+          state.squares[i] = state.gameTurn ? 'X' : 'O';
+          setState({ ...state, squares: state.squares, gameTurn: !state.gameTurn });
+        }
+        else {
+          // alert("A Draw !");
+          return;
+        }
+      }
+      else {
+        // alert("Game OVer ! Winner is: " + state.winner);
+        return;
+      }
   }
 
-  const player = state.gameTurn ? 'X' : 'O';
+  //report
+  const status =
+    (winner) ? 'Victory! Winner is: ' + winner :
+      (!state.squares.includes(null)) ? 'A Draw !' :
+        (state.gameTurn) ? 'Next Player: X' : 'Next Player: O';
+
+  //refresh the board 
+  const Restart = (xIsNext) => {
+    setState({ squares: Array(9).fill(null), gameTurn: xIsNext })
+  }
 
   return (
     <View>
       <View style={styles.banner}>
-        <Text style={styles.bannerText}> Next Player:  {player} </Text>
+        <Text style={styles.bannerText}> {status} </Text>
       </View>
       <View style={styles.buttonRow}>
         {renderSquare(0)}
