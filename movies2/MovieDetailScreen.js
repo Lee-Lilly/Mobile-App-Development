@@ -44,10 +44,10 @@ const MovieDetailScreen = props => {
 
   const trailers = detail.videos.map((video, index) => {
     let title = video.name;
-    let url = 'https://www.youtube.com/watch?v=' + video.key;
+    let url = 'https://youtu.be/' + video.key;
     return (
       <TouchableOpacity>
-        <Text style={styles.link} onpress={() => Linking.openURL(url)}>
+        <Text style={styles.link} onPress={() => Linking.openURL(url)}>
           {title}
         </Text>
       </TouchableOpacity>

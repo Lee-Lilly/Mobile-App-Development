@@ -5,7 +5,6 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import MovieListScreen from './MovieListScreen';
 import MovieDetailScreen from './MovieDetailScreen';
-//import MovieTrailerScreen from './MovieTrailerScreen';
 
 const Stack = createStackNavigator();
 
