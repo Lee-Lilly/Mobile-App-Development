@@ -137,7 +137,6 @@ export default function App() {
     return <WeatherCard city={city.name} id={index} deleteCity={deleteCity} />;
   });
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const storeData = async () => {
     try {
       await AsyncStorage.setItem('@cityList', JSON.stringify(cityList));
@@ -161,8 +160,8 @@ export default function App() {
   }, []);
 
   React.useEffect(() => {
-    storeData();
-  }, [cityList, storeData]);
+    storeData(); // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cityList]);
 
   return (
     <Container>
