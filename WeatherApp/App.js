@@ -16,6 +16,7 @@ import {
 
 import Dialog from 'react-native-dialog';
 import useAxios from 'axios-hooks';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const WeatherCard = props => {
   const city = props.city;
@@ -33,6 +34,7 @@ const WeatherCard = props => {
   }
 
   if (error) {
+    console.log('Error of data accessing');
     return <Text />;
   }
 
@@ -134,6 +136,33 @@ export default function App() {
   const cities = cityList.map((city, index) => {
     return <WeatherCard city={city.name} id={index} deleteCity={deleteCity} />;
   });
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const storeData = async () => {
+    try {
+      await AsyncStorage.setItem('@cityList', JSON.stringify(cityList));
+    } catch (e) {
+      console.log('City saving error!');
+    }
+  };
+
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('@cityList');
+      if (value !== null) {
+        setCityList(JSON.parse(value));
+      }
+    } catch (e) {
+      console.log('City loading error!');
+    }
+  };
+  React.useEffect(() => {
+    getData();
+  }, []);
+
+  React.useEffect(() => {
+    storeData();
+  }, [cityList, storeData]);
 
   return (
     <Container>
