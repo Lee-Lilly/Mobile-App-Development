@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Dimensions, Text, Button, ScrollView } from 'react-native';
+import { View, StyleSheet, Dimensions, Text, Button, ScrollView, Alert } from 'react-native';
 import { Header } from 'react-native-elements';
 import { TabView, SceneMap } from 'react-native-tab-view';
 import { Icon } from 'react-native-vector-icons';
