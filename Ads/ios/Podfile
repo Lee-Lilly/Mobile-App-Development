@@ -8,6 +8,8 @@ target 'Ads' do
 
   use_react_native!(:path => config["reactNativePath"])
 
+  pod 'react-native-admob', :path => '../node_modules/react-native-admob'
+
   target 'AdsTests' do
     inherit! :complete
     # Pods for testing
