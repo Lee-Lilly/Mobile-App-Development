@@ -25,16 +25,18 @@ import {
 AdMobRewarded.setAdUnitID('ca-app-pub-6213982046179727/1711883444');
 AdMobInterstitial.setAdUnitID('ca-app-pub-6213982046179727/4968602179');
 
-const showRewarded = () => {
-  AdMobRewarded.showAd().catch(error => console.warn(error));
-}
-
-const showInterstitial = () => {
-  AdMobInterstitial.showAd().catch(error => console.warn(error));
-}
-
 const App: () => React$Node = () => {
   const [reward, setReward] = React.useState(0);
+
+  const showRewarded = () => {
+    AdMobRewarded.showAd().catch(error => console.warn(error));
+    //increase the reward count by 10
+    setReward(reward+10);
+  }
+
+  const showInterstitial = () => {
+    AdMobInterstitial.showAd().catch(error => console.warn(error));
+  }
 
   return (
     <>
@@ -59,11 +61,7 @@ const App: () => React$Node = () => {
             <View style={styles.sectionContainer}>
               <Button
                 title="Show A Rewarded Video"
-                onPress= {() => { 
-                                   {showRewarded};
-                                   setReward(reward+10);
-                                }
-                        }
+                onPress= {showRewarded}                
               />
               <Text style={styles.sectionDescription}>Reward count: {reward} </Text> 
             </View>
