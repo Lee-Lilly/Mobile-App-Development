@@ -17,6 +17,22 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import {
+  AdMobInterstitial,
+  AdMobRewarded,
+} from 'react-native-admob';
+
+AdMobRewarded.setAdUnitID('ca-app-pub-6213982046179727/1711883444');
+AdMobInterstitial.setAdUnitID('ca-app-pub-6213982046179727/4968602179');
+
+const showRewarded = () => {
+  AdMobRewarded.showAd().catch(error => console.warn(error));
+}
+
+const showInterstitial = () => {
+  AdMobInterstitial.showAd().catch(error => console.warn(error));
+}
+
 const App: () => React$Node = () => {
   const [reward, setReward] = React.useState(0);
 
@@ -37,11 +53,17 @@ const App: () => React$Node = () => {
             <View style={styles.sectionContainer}>
               <Button
                 title="Show A Interstitial"
+                onPress={showInterstitial}
               />     
             </View>
             <View style={styles.sectionContainer}>
               <Button
                 title="Show A Rewarded Video"
+                onPress= {() => { 
+                                   {showRewarded};
+                                   setReward(reward+10);
+                                }
+                        }
               />
               <Text style={styles.sectionDescription}>Reward count: {reward} </Text> 
             </View>
