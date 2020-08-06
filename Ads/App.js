@@ -23,19 +23,55 @@ import {
 } from 'react-native-admob';
 
 AdMobRewarded.setAdUnitID('ca-app-pub-6213982046179727/1711883444');
+AdMobRewarded.addEventListener('adLoaded', () =>
+  console.log('AdMobRewarded => adLoaded'),
+);
+AdMobRewarded.addEventListener('adFailedToLoad', error =>
+  console.warn(error),
+);
+AdMobRewarded.addEventListener('adOpened', () =>
+  console.log('AdMobRewarded => adOpened'),
+);
+AdMobRewarded.addEventListener('videoStarted', () =>
+  console.log('AdMobRewarded => videoStarted'),
+);
+AdMobRewarded.addEventListener('adClosed', () => {
+  console.log('AdMobRewarded => adClosed');
+  AdMobRewarded.requestAd().catch(error => console.warn(error));
+});
+AdMobRewarded.addEventListener('adLeftApplication', () =>
+  console.log('AdMobRewarded => adLeftApplication'),
+);
+
 AdMobInterstitial.setAdUnitID('ca-app-pub-6213982046179727/4968602179');
+AdMobInterstitial.addEventListener('adLoaded', () =>
+  console.log('AdMobInterstitial adLoaded'),
+);
+AdMobInterstitial.addEventListener('adFailedToLoad', error =>
+  console.warn(error),
+);
+AdMobInterstitial.addEventListener('adOpened', () =>
+  console.log('AdMobInterstitial => adOpened'),
+);
+AdMobInterstitial.addEventListener('adClosed', () => {
+  console.log('AdMobInterstitial => adClosed');
+  AdMobInterstitial.requestAd().catch(error => console.warn(error));
+});
+AdMobInterstitial.addEventListener('adLeftApplication', () =>
+  console.log('AdMobInterstitial => adLeftApplication'),
+);
 
 const App: () => React$Node = () => {
   const [reward, setReward] = React.useState(0);
 
   const showRewarded = () => {
-    AdMobRewarded.showAd().catch(error => console.warn(error));
+    AdMobRewarded.requestAd().then(() => AdMobRewarded.showAd()).catch(error => console.warn(error));
     //increase the reward count by 10
     setReward(reward+10);
   }
 
   const showInterstitial = () => {
-    AdMobInterstitial.showAd().catch(error => console.warn(error));
+    AdMobInterstitial.requestAd().then(() => AdMobInterstitial.showAd()).catch(error => console.warn(error));
   }
 
   return (
