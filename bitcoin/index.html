@@ -10,12 +10,13 @@
     <link rel="stylesheet" type="text/css" href="styles.css" media="all">
     <link rel="manifest" href="manifest.json">
   </head>
-  <body>
+  <body onload="lastBTC()">
     <div id="container">
       <h1>Bitcoin Value Fetcher</h1>
       <button onclick="fetchBitcoin()">Get it!</button>
       <p id="bitcoinText"></p>
     </div>
+
     <!-- add service worker register script here -->
     <script>
         if ('serviceWorker' in navigator) {
@@ -25,8 +26,12 @@
                 });
         }
     </script>
-    <script>
+    <!-- add fetch value button onclick script here -->
+    <script> 
         function fetchBitcoin() {
+            if (!navigator.onLine) {
+                alert("Device is offline!");
+            }
             var url = 'https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC&tsyms=EUR';
             var request = new XMLHttpRequest();
             request.onreadystatechange = function () {
@@ -36,11 +41,16 @@
                         var now = new Date().toLocaleDateString();
                         document.getElementById("bitcoinText").innerHTML = now + " : " + response.BTC.EUR + " €";
                         // store value to local store here later
+                        localStorage.setItem("btc", now + " : " + response.BTC.EUR + " €");
                     }
                 }
             };
             request.open('GET', url);
             request.send();
+        }
+
+        function lastBTC() {
+                document.getElementById("bitcoinText").innerHTML = localStorage.getItem("btc");
         }
     </script>
   </body>
