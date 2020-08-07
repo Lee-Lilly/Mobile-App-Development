@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Bitcoin">
+    <meta name="theme-color" content="#685f85"/>
+    <title>Bitcoin Value Fetcher</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" media="all">
+    <link rel="manifest" href="manifest.json">
+  </head>
+  <body>
+    <div id="container">
+      <h1>Bitcoin Value Fetcher</h1>
+      <button onclick="fetchBitcoin()">Get it!</button>
+      <p id="bitcoinText"></p>
+    </div>
+    <!-- add service worker register script here -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./serviceworker.js')
+                .then(function () {
+                    console.log('Service Worker Registered');
+                });
+        }
+    </script>
+    <script>
+        function fetchBitcoin() {
+            var url = 'https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC&tsyms=EUR';
+            var request = new XMLHttpRequest();
+            request.onreadystatechange = function () {
+                if (request.readyState === XMLHttpRequest.DONE) {
+                    if (request.status === 200) {
+                        var response = JSON.parse(request.response);
+                        var now = new Date().toLocaleDateString();
+                        document.getElementById("bitcoinText").innerHTML = now + " : " + response.BTC.EUR + " €";
+                        // store value to local store here later
+                    }
+                }
+            };
+            request.open('GET', url);
+            request.send();
+        }
+    </script>
+  </body>
+</html>
