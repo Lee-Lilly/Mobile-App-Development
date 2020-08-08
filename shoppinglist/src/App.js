@@ -16,7 +16,6 @@ import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import { Container } from '@material-ui/core';
 
 // styles for Material-UI
 const useStyles = makeStyles(theme => ({
@@ -35,7 +34,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.primary.light,
     color: theme.palette.primary.contrastText,
     position: 'relative',
-    width: '350px',
+    width: '210px',
     borderStyle: 'solid',
     margin: theme.spacing(2),
   },
@@ -150,7 +149,7 @@ function App() {
             value={item}
             placeholder ="Item" 
             variant="filled"
-            size ="small"
+            size="small"
             onChange={e => setItem(e.target.value)} required />
       </FormControl>
       <FormControl className={classes.selectEmpty}>
@@ -173,7 +172,7 @@ function App() {
       <FormControl className={classes.formControl}>
         <Button variant="contained" color="primary" onClick={() => addItem()}>ADD</Button>
       </FormControl>
-      <Container className={classes.marginAutoItem}>{db_items}</Container>
+      <div className={classes.marginAutoItem}>{db_items}</div>
     </div>
   );
 }
