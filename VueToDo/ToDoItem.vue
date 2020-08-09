@@ -1,6 +1,6 @@
 <template>
   <view class="row">
-    <text>* {{item.text}}</text>
+    <text>{{item.text}}</text>
     <text :on-press="onRemoveTodo" class="listItemDelete">  X </text>
   </view>
 </template>

@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import TodoItem from "./TodoItem"
+import TodoItem from "./ToDoItem"
 export default {
     components: { 'todo-item':TodoItem },
     data: function() {
