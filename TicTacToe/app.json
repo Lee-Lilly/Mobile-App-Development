@@ -2,14 +2,15 @@
   "expo": {
     "name": "TicTacToe",
     "slug": "TicTacToe",
+    "version": "1.0.0",
+    "description" :"A Simple TicTacToe Game for two",
     "platforms": [
       "ios",
       "android",
       "web"
-    ],
-    "version": "1.0.0",
+    ], 
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/tic-tac-toe.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -23,6 +24,10 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.example.tictactoe",
+      "versionCode": 1
     }
   }
 }

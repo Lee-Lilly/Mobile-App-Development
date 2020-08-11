@@ -51,7 +51,7 @@ const Board = () => {
         }
       }
       else {
-        // alert("Game OVer ! Winner is: " + state.winner);
+        alert("Game Over !");
         return;
       }
   }
@@ -138,13 +138,13 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     padding: 20,
     justifyContent: 'space-around',
-    width: 320
+    width: 320,
   },
   buttonText: {
     backgroundColor: '#b8e6f5',
     width: 50,
     height: 50,
-    color: "white",
+    color: "black",
     fontSize: 24,
     textAlign: 'center',
     fontWeight: 'bold'
