@@ -34,7 +34,7 @@ const WeatherCard = props => {
   }
 
   if (error) {
-    console.log('Error of data accessing');
+    console.log(error);
     return <Text />;
   }
 
@@ -97,7 +97,7 @@ const WeatherCard = props => {
 function timeConverter(UNIX_timestamp) {
   let timestamp = new Date(UNIX_timestamp * 1000);
   let year = timestamp.getFullYear();
-  let month = timestamp.getMonth();
+  let month = timestamp.getMonth() + 1;
   let date = timestamp.getDate();
   let hours = timestamp.getHours();
   let minutes = '0' + timestamp.getMinutes();
@@ -127,6 +127,7 @@ export default function App() {
   const addCity = () => {
     setCityList([...cityList, {name: cityName}]);
     setDialogVisible(false);
+    storeData(cityList);
   };
 
   const deleteCity = index => {
@@ -134,7 +135,14 @@ export default function App() {
   };
 
   const cities = cityList.map((city, index) => {
-    return <WeatherCard city={city.name} id={index} deleteCity={deleteCity} />;
+    return (
+      <WeatherCard
+        key={index}
+        id={index}
+        city={city.name}
+        deleteCity={deleteCity}
+      />
+    );
   });
 
   const storeData = async () => {
@@ -155,13 +163,10 @@ export default function App() {
       console.log('City loading error!');
     }
   };
+
   React.useEffect(() => {
     getData();
   }, []);
-
-  React.useEffect(() => {
-    storeData(); // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cityList]);
 
   return (
     <Container>
