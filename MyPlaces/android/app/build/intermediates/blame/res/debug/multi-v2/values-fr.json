@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\chang\\Documents\\MoblieAppDev\\mobile-exercises\\MyPlaces\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-fr\\values-fr.xml",
+            "outputFile": "C:\\Users\\chang\\Documents\\ClonedMobileEx\\mobile-exercises\\MyPlaces\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-fr\\values-fr.xml",
             "map": [
                 {
                     "source": "C:\\Users\\chang\\.gradle\\caches\\transforms-2\\files-2.1\\bc3b48ab3975019d38dc45f166431192\\jetified-play-services-basement-17.0.0\\res\\values-fr\\values.xml",

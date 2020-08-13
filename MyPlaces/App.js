@@ -26,7 +26,7 @@ import {
 
 import AsyncStorage from '@react-native-community/async-storage';
 
-const MarkerPin = (props) => {
+const MarkedPlace = (props) => {
   const place = props.title;
   const description = props.details;
 
@@ -39,10 +39,10 @@ const MarkerPin = (props) => {
     + '&q=' + place
     + '&pretty=1'
     + '&no_annotations=1';
-  
+
   const [lat, setLatitude] = React.useState(0);
-  const [lng, setLongitude] =React.useState(0);
-  const [status, setStatus] =React.useState('');
+  const [lng, setLongitude] = React.useState(0);
+  const [status, setStatus] = React.useState('');
 
   React.useEffect(() => {
     fetch(request_url)
@@ -57,13 +57,12 @@ const MarkerPin = (props) => {
   }, []);
 
   return (
-   <Marker
+    <Marker
       title={place}
       description={description}
-      coordinate = {{latitude: lat, longitude: lng}}
+      coordinate={{ latitude: lat, longitude: lng }}
       image={require('./img/place-marker.png')}
-   />
-  );
+    />);
 };
 
 
@@ -93,12 +92,12 @@ const App: () => React$Node = () => {
     setDialogVisible(false);
     saveData(placeList);
   };
-  
+
   const places = placeList.map((place, index) => {
-    return <MarkerPin 
-                key={index}
-                title={place.name} 
-                details={place.description}/>;
+    return <MarkedPlace
+      key={index}
+      title={place.name}
+      details={place.description} />;
   });
 
   const saveData = async () => {
@@ -113,8 +112,8 @@ const App: () => React$Node = () => {
   const readData = async () => {
     try {
       const value = await AsyncStorage.getItem('@markers')
-     if (value !== null) {
-       setPlaceList(JSON.parse(value))
+      if (value !== null) {
+        setPlaceList(JSON.parse(value))
       }
     } catch (e) {
       alert('Failed to fetch the data from storage')
@@ -164,7 +163,7 @@ const App: () => React$Node = () => {
 };
 
 const styles = StyleSheet.create({
-  
+
   FloatButtonStyle: {
     backgroundColor: '#0e42eb',
     borderColor: '#0e42eb',
